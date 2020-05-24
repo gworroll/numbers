@@ -5,16 +5,22 @@
 #         Where n is a number you are curious about
 
 import requests
+import sys
+import json
 
-url = "https://numbersapi.p.rapidapi.com/random/trivia"
+number = sys.argv[1]
+request_type = "math"
+url = "https://numbersapi.p.rapidapi.com/" + number + "/" + request_type + "/"
 
-querystring = {"max":"20","fragment":"true","min":"10","json":"true"}
+querystring = {"json":"true"}
 
 headers = {
     'x-rapidapi-host': "numbersapi.p.rapidapi.com",
-    'x-rapidapi-key': "9be3543240msh04b5ecbb90c408ep15f00bjsn4d5dfc210d07"
+    'x-rapidapi-key': "c68c73025bmsh47ccb345ec563dap1d4992jsnbe5452a4b59c"
     }
 
 response = requests.request("GET", url, headers=headers, params=querystring)
 
-print(response.text)
+information = json.loads(response.text)
+
+print(information['text'])
